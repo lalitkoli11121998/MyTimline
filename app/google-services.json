@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "658341959907",
+    "firebase_url": "https://mytimline-e8475.firebaseio.com",
+    "project_id": "mytimline-e8475",
+    "storage_bucket": "mytimline-e8475.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658341959907:android:e2ecb90957594c0f",
+        "android_client_info": {
+          "package_name": "com.example.dell.mytimline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658341959907-a9obihq2b4m4117l9ckm98ib41e53kbk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dell.mytimline",
+            "certificate_hash": "4c002bf212211d588d85ce586d0dfefd4ed40ed2"
+          }
+        },
+        {
+          "client_id": "658341959907-rv6419tk8o5cpkfij8l791iomsf5sds6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTF2HlHLGUMJfYiNxPLaDZbKD-cD6Z80A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658341959907-rv6419tk8o5cpkfij8l791iomsf5sds6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

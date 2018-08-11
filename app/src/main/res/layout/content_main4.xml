@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dell.mytimline.Main4Activity"
+    tools:showIn="@layout/activity_main4">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/CimageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
+
+    <TextView
+        android:id="@+id/NmeView2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_below="@+id/CimageView2"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/emailview"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_alignLeft="@+id/NmeView2"
+        android:layout_alignStart="@+id/NmeView2"
+        android:layout_below="@+id/NmeView2"
+        android:layout_marginTop="19dp"
+        android:text="TextView"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/passwordview"
+        android:textSize="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_alignLeft="@+id/emailview"
+        android:layout_alignStart="@+id/emailview"
+        android:layout_below="@+id/emailview"
+        android:layout_marginTop="29dp"
+        android:text="TextView" />
+
+
+</RelativeLayout>

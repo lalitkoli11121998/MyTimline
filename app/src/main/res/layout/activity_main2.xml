@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/image26"
+    android:layout_height="match_parent"
+    tools:context="com.example.dell.mytimline.Main2Activity">
+
+
+    <EditText
+        android:id="@+id/Nametext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Emailtext2"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Name"
+        android:textColorHint="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_red_dark"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="23dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/Nametext2"
+        android:layout_toLeftOf="@+id/Nametext2"
+        android:layout_toStartOf="@+id/Nametext2"
+        app:layout_constraintBottom_toBottomOf="@+id/Nametext2"
+        app:layout_constraintEnd_toStartOf="@+id/Nametext2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97"
+        app:srcCompat="@android:drawable/sym_contact_card" />
+
+    <EditText
+        android:id="@+id/Emailtext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/passwordtext2"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/imageView6"
+        android:layout_toRightOf="@+id/imageView6"
+        android:ems="10"
+        android:textColorHint="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_red_dark"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Nametext2"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Emailtext2"
+        android:layout_toLeftOf="@+id/Nametext2"
+        android:layout_toStartOf="@+id/Nametext2"
+        app:layout_constraintBottom_toBottomOf="@+id/Emailtext2"
+        app:layout_constraintEnd_toStartOf="@+id/Emailtext2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/sym_action_email" />
+
+    <EditText
+        android:id="@+id/passwordtext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Phonetext"
+        android:layout_toEndOf="@+id/imageView6"
+        android:layout_toRightOf="@+id/imageView6"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Emailtext2"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView5"
+        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignTop="@+id/passwordtext2"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordtext2"
+        app:layout_constraintEnd_toStartOf="@+id/passwordtext2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_lock_lock" />
+
+    <EditText
+        android:id="@+id/Phonetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/adhar_number"
+        android:layout_alignLeft="@+id/passwordtext2"
+        android:layout_alignStart="@+id/passwordtext2"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:hint="Phone-N0"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordtext2"
+        app:layout_constraintVertical_bias="0.04000002" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Phonetext"
+        android:layout_alignEnd="@+id/imageView9"
+        android:layout_alignRight="@+id/imageView9"
+        app:layout_constraintBottom_toBottomOf="@+id/Phonetext"
+        app:layout_constraintEnd_toStartOf="@+id/Phonetext"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/stat_sys_phone_call_forward" />
+
+    <TextView
+        android:id="@+id/adhar_number"
+        android:layout_width="220dp"
+        android:textColor="@android:color/black"
+        android:textSize="19dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/signup_button"
+        android:layout_marginBottom="35dp"
+        android:layout_toEndOf="@+id/imageView9"
+        android:layout_toRightOf="@+id/imageView9"
+        android:ems="10"
+        android:textColorHint="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Phonetext"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView6"
+        android:layout_alignStart="@+id/imageView6"
+        android:layout_alignTop="@+id/adhar_number"
+        app:layout_constraintBottom_toBottomOf="@+id/adhar_number"
+        app:layout_constraintEnd_toStartOf="@+id/adhar_number"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/adhar_number"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/adhar_number"
+        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="SignUp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adhar_number"
+        app:layout_constraintVertical_bias="0.327" />
+
+</RelativeLayout>
