@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/uploadimageview"
-        android:layout_width="match_parent"
-        android:layout_height="125dp" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
