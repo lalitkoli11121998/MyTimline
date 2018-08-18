@@ -3,8 +3,10 @@ package com.example.dell.mytimline;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
@@ -81,7 +84,6 @@ public class Main3Activity extends AppCompatActivity {
         final String pass = newintent.getStringExtra("pass");
          email = newintent.getStringExtra("email");
          imageurl = newintent.getStringExtra("imageurl");
-         Toast.makeText(Main3Activity.this ,imageurl,Toast.LENGTH_SHORT).show();
         final String name = newintent.getStringExtra("name");
         circleImageView.setImageURI(Uri.parse(imageurl));
         Picasso.get().load(imageurl).into(circleImageView);
@@ -98,7 +100,7 @@ public class Main3Activity extends AppCompatActivity {
                 in.putExtra("pass", pass);
                 in.putExtra("imageurl", imageurl);
                 in.putExtra("email", email);
-                in.putExtra("uploadlilst", uploadlist);
+                in.putExtra("uploadlist", uploadlist);
                 in.putExtra("name", name);
                 startActivity(in);
             }
@@ -125,6 +127,7 @@ public class Main3Activity extends AppCompatActivity {
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference coffeeRef = rootRef.collection("photo");
         coffeeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -132,10 +135,13 @@ public class Main3Activity extends AppCompatActivity {
                     for (DocumentSnapshot document : task.getResult()) {
 
                        photopick photo = document.toObject(photopick.class);
-                       if(photo.getEmail() == email)
-                        {
+                        if(Objects.equals(email, photo.getEmail())) {
+                            Log.d("newfind2", photo.getEmail());
                             uploadlist.add(photo.getImageuri());
                         }
+
+
+
                        if(photo.getImageuri()!= null) {
                            list.add(photo);
                        }
