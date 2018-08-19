@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -49,34 +50,48 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 public class Main3Activity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,statusrecycler;
     ImageView imageView,popimage;
     StorageReference mStorageRef;
-    SmoothProgressBar mSmoothProgressBar;
+    Uri videoUri;
     Uri selectedImageUri;
     UsersRecyclerAdapter usersRecyclerAdapter;
     FirebaseStorage mstorage;
     CircleImageView circleImageView;
-    ProgressBar progressBar;
     Dialog mydialog;
-    DatabaseReference myRef;
     photopick pick;
+    StatusAdapter statusAdapter;
     private int RC_PHOTO_PICKER=101;
     ArrayList<photopick>list = new ArrayList<>();
     ArrayList<String> uploadlist = new ArrayList<>();
     String id;
-    UserData userData;
+    static final int CAMERA_REQUEST_CODE_VEDIO = 1999;
     String imageurl;
     String email;
+    ImageView statuspic;
+    ArrayList<String>ST = new ArrayList<>();
     Intent newintent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        statusrecycler= findViewById(R.id.statusrecycle);
         setSupportActionBar(toolbar);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mstorage = FirebaseStorage.getInstance();
+        statuspic= findViewById(R.id.statuspic);
+        statuspic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takeVideoIntent,
+                            CAMERA_REQUEST_CODE_VEDIO);
+                }
+            }
+        });
        // progressBar = findViewById(R.id.progress);
         circleImageView = findViewById(R.id.CimageView);
         newintent = getIntent();
@@ -116,6 +131,7 @@ public class Main3Activity extends AppCompatActivity {
 
 
     fetchimagefromdatabase();
+
     }
 
 
@@ -131,13 +147,13 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.d("herhe", task.getResult().toString());
+                    HashMap<String ,Integer>map= new HashMap<>();
                     for (DocumentSnapshot document : task.getResult()) {
 
                        photopick photo = document.toObject(photopick.class);
+                        ST.add(photo.getImageuri());
                         if(Objects.equals(email, photo.getEmail())) {
-                            Log.d("newfind2", photo.getEmail());
-                            uploadlist.add(photo.getImageuri());
+                            uploadlist.add(photo.getPicimageurl());
                         }
 
 
@@ -146,7 +162,16 @@ public class Main3Activity extends AppCompatActivity {
                            list.add(photo);
                        }
                     }
-                    Log.d("size", String.valueOf(list.size()));
+                    Log.d("newfind3", String.valueOf(ST.size()));
+                    statusAdapter = new StatusAdapter(Main3Activity.this, ST, new StatusAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+
+                        }
+                    });
+                    statusrecycler.setAdapter(statusAdapter);
+                    statusAdapter.notifyDataSetChanged();
+                    statusrecycler.setLayoutManager(new LinearLayoutManager(Main3Activity.this, LinearLayout.HORIZONTAL, false));
                 usersRecyclerAdapter = new UsersRecyclerAdapter(Main3Activity.this,imageurl ,email, list, new UsersRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -176,7 +201,6 @@ public class Main3Activity extends AppCompatActivity {
         });
 
     }
-
     public void Takeimage() {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -193,6 +217,10 @@ public class Main3Activity extends AppCompatActivity {
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == CAMERA_REQUEST_CODE_VEDIO)
+        {
+             videoUri = data.getData();
+        }
         if (requestCode == RC_PHOTO_PICKER) {
             if (resultCode == RESULT_OK) {
                 selectedImageUri = data.getData();

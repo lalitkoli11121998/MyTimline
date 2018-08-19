@@ -32,13 +32,6 @@ android:background="@drawable/images24"
 
                 </android.support.v7.widget.RecyclerView>
 
-                <ImageView
-                    android:id="@+id/toolbarimage"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:fitsSystemWindows="true"
-                    android:src="@mipmap/ic_launcher"
-                    />
 
             </RelativeLayout>
 
@@ -57,11 +50,22 @@ android:background="@drawable/images24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_camera"
                     android:id="@+id/uploadimage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="30dp"
+                    android:src="@drawable/statuspic"
+                    android:layout_height="25dp" />
 
+                <ImageView
+                    android:id="@+id/statuspic"
+                    android:layout_width="35dp"
+                    android:layout_height="34dp"
+                    android:layout_alignBottom="@+id/uploadimage"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/uploadimage"
+
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:layout_toRightOf="@+id/uploadimage" />
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/CimageView"
