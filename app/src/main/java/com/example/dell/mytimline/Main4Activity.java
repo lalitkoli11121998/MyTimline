@@ -1,5 +1,6 @@
 package com.example.dell.mytimline;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -72,6 +73,7 @@ public class Main4Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intt = new Intent(Main4Activity.this ,MainActivity.class);
                 Toast.makeText(Main4Activity.this ,"Successfull logout", Toast.LENGTH_SHORT).show();
+                finish();
                 startActivity(intt);
             }
         });

@@ -56,7 +56,7 @@ android:background="@drawable/images24"
                     android:layout_height="25dp" />
 
                 <ImageView
-                    android:id="@+id/statuspic"
+                    android:id="@+id/notification"
                     android:layout_width="35dp"
                     android:layout_height="34dp"
                     android:layout_alignBottom="@+id/uploadimage"
@@ -64,8 +64,9 @@ android:background="@drawable/images24"
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/uploadimage"
 
-                    android:src="@android:drawable/ic_menu_camera"
+                    android:src="@drawable/notification"
                     android:layout_toRightOf="@+id/uploadimage" />
+
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/CimageView"
@@ -73,7 +74,7 @@ android:background="@drawable/images24"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="9dp"
                     android:layout_height="31dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/statuspic"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp" />
 

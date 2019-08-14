@@ -2,14 +2,16 @@ package com.example.dell.mytimline;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by dell on 7/10/2018.
  */
 
-public class photopick {
+public class photopick implements Serializable {
 
+    String Name;
     String imageuri;
     int like;
     String id;
@@ -17,13 +19,8 @@ public class photopick {
     String picimageurl;
     String  email;
 
-    public photopick(String imageuri, int like, String id, ArrayList<comment> arrayList) {
-        this.imageuri = imageuri;
-        this.like = like;
-        this.id = id;
-        this.arrayList = arrayList;
-    }
-    public photopick(String imageuri, int like, String id, ArrayList<comment> arrayList,  String picimageurl,String  email) {
+
+    public photopick( String imageuri, int like, String id, ArrayList<comment> arrayList,  String picimageurl,String  email) {
         this.imageuri = imageuri;
         this.like = like;
         this.id = id;
@@ -44,7 +41,6 @@ public class photopick {
     public photopick(){
 
     }
-
     public String getId() {
         return id;
     }
@@ -72,8 +68,6 @@ public class photopick {
         this.imageuri = imageuri;
         this.like = like;
         this.id =id;
-
-
 
     }
 

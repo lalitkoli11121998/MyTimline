@@ -37,13 +37,18 @@ public class CommentActivity extends AppCompatActivity {
     ImageView save;
     EditText editText;
     ArrayList<comment>cmt = new ArrayList<>();
+    ArrayList<photopick>mnlist = new ArrayList<>();
+    ArrayList<comment>tmpcmt = new ArrayList<>();
     String uid;
     int likes;
     String imageuri;
     String circleimage;
     String picimage;
     Intent newintent;
+    String loginpic; //pic of person who logged in app
+    String loginemail; // email of preson who logged in app
     similiarAdapter SimiliarAdapter;
+    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +60,16 @@ public class CommentActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText1);
 
        newintent = getIntent();
+       imageuri = newintent.getStringExtra("imageurl");
        uid = newintent.getStringExtra("uid");
        cmt = (ArrayList<comment>) getIntent().getSerializableExtra("comment");
-        picimage = newintent.getStringExtra("picimage"); // image of the  user who comment on the pic
-       final String email = newintent.getStringExtra("email");
+       mnlist = (ArrayList<photopick>)getIntent().getSerializableExtra("mainlist");
+       position = newintent.getIntExtra("pos",0);
+        picimage = newintent.getStringExtra("picimageurl");
+        loginpic = newintent.getStringExtra("loginpic");
+        loginemail = newintent.getStringExtra("loginemail");
        final String useremail = newintent.getStringExtra("useremail");
+        likes = newintent.getIntExtra("likes" ,0);
        SimiliarAdapter = new similiarAdapter(CommentActivity.this, cmt, new similiarAdapter.OnItemClickListener() {
            @Override
            public void onItemClick(int position) {
@@ -71,9 +81,7 @@ public class CommentActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(CommentActivity.this,GridLayoutManager.VERTICAL,false));
 
-       likes = newintent.getIntExtra("likes" ,0);
-       imageuri =  newintent.getStringExtra("image");//image on which user comment
-        circleimage = newintent.getStringExtra("circleimage");
+
 
 
      //  Toast.makeText(CommentActivity.this ,imageuri,Toast.LENGTH_SHORT).show();
@@ -81,16 +89,21 @@ public class CommentActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               String ans = editText.getText().toString();
-              comment cmm = new comment(picimage, email ,ans);
+              comment cmm = new comment(loginpic,loginemail,ans);
               cmt.add(cmm);
-                SimiliarAdapter.notifyDataSetChanged();
-              final FirebaseFirestore db;
-              db = FirebaseFirestore.getInstance();
-               DocumentReference ref = db.collection("photo").document(uid);
-               photopick p = new photopick(imageuri ,likes,uid,cmt ,circleimage, useremail);
-               //
-              //photopick ph = new photopick(users.get(position).imageuri ,like ,id ,picimage.toString() ,email);
-              ref.set(p);
+              tmpcmt = cmt;
+              SimiliarAdapter.notifyDataSetChanged();
+              mnlist.get(position).setArrayList(cmt);
+             // Toast.makeText(CommentActivity.this, picimage, Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(CommentActivity.this,String.valueOf(cmt.size()),Toast.LENGTH_LONG).show();
+             newintent.putExtra("newcomment", cmm.getComt());
+             newintent.putExtra("newcommentemail", cmm.getEmail());
+             newintent.putExtra("newcommentpic", cmm.getImageurl());
+             newintent.putExtra("returnposition", position);
+             newintent.putExtra("newuid", uid);
+             setResult(199,newintent);
+
+
           }
       });
 

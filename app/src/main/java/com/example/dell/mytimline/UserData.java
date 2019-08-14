@@ -3,6 +3,7 @@ package com.example.dell.mytimline;
 import android.net.Uri;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 /**
  * Created by NITANT SOOD on 22-04-2018.
@@ -12,7 +13,7 @@ public class UserData {
     String email,password,name,adhar_no, phone;
     String imageurl;
     String title;
-
+    ArrayList<notification>not;
 
 public UserData()
 {

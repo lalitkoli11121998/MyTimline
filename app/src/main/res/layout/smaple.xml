@@ -54,7 +54,7 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/likecount"
+                android:id="@+id/likecounttext"
                 android:layout_width="23dp"
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"

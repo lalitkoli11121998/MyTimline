@@ -2,8 +2,12 @@ package com.example.dell.mytimline;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +34,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
+import static android.speech.tts.TextToSpeech.QUEUE_FLUSH;
+
 public class MainActivity extends AppCompatActivity {
 
     Button signIn ,signout;
@@ -41,25 +50,29 @@ public class MainActivity extends AppCompatActivity {
     TextView t;
     String idu;
     ProgressDialog dialog;
+    private TextToSpeech myTTS;
     String adhar;
     String imageurl;
     Dialog mydialog;
     String nametext;
     String ph;
    TextView signup;
+    CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         signIn = findViewById(R.id.signIn_button);
         mAuth = FirebaseAuth.getInstance();
+
         dialog =new ProgressDialog(this);
         signout = findViewById(R.id.signout_button);
 
-        name = findViewById(R.id.Nametext);
-        email = findViewById(R.id.Emailtext);
-        pass = findViewById(R.id.passwordtext);
+        name = findViewById(R.id.Nametext); // name
+        email = findViewById(R.id.Emailtext); // email
+        pass = findViewById(R.id.passwordtext); // password
         signup = findViewById(R.id.textView);
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,64 +130,73 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     private void SignInUser() {
-        dialog.setMessage("login....");
-        dialog.show();
-        final String emailText=email.getText().toString();
-        String password=pass.getText().toString();
-        mAuth.signInWithEmailAndPassword(emailText, password)
 
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            final FirebaseUser user = mAuth.getCurrentUser();
-                            if(user!=null)
-                                Toast.makeText(MainActivity.this,"successfull login", Toast.LENGTH_SHORT).show();
+        emailtext = email.getText().toString();
+        String password = pass.getText().toString();
+        Toast.makeText(MainActivity.this, emailtext, Toast.LENGTH_SHORT).show();
+        if ((emailtext.matches(""))) {
+            Toast.makeText(MainActivity.this, "enter the email..", Toast.LENGTH_SHORT).show();
+        }
+        else if((password.matches(""))) {
+            Toast.makeText(MainActivity.this, "enter the password..", Toast.LENGTH_SHORT).show();
+        }
+         else {
+            dialog.setMessage("login....");
+            dialog.show();
+            mAuth.signInWithEmailAndPassword(emailtext, password)
 
-                            FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-                            CollectionReference coffeeRef = rootRef.collection(user.getEmail());
-                            coffeeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (DocumentSnapshot document : task.getResult()) {
-                                             emailtext = document.getString("email");
-                                             passtext = document.getString("password");
-                                             adhar = document.getString("adhar_no");
-                                             imageurl = document.getString("imageurl");
-                                             nametext = document.getString("name");
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                final FirebaseUser user = mAuth.getCurrentUser();
+                                if (user != null)
+                                    Toast.makeText(MainActivity.this, "successfull login", Toast.LENGTH_SHORT).show();
+
+                                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+                                CollectionReference coffeeRef = rootRef.collection(user.getEmail());
+                                coffeeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                emailtext = document.getString("email");
+                                                passtext = document.getString("password");
+                                                adhar = document.getString("adhar_no");
+                                                imageurl = document.getString("imageurl");
+                                                nametext = document.getString("name");
 
 
+                                            }
+                                            Toast.makeText(MainActivity.this,imageurl,Toast.LENGTH_LONG).show();
+                                            Intent in = new Intent(MainActivity.this, Main3Activity.class);
+                                            in.putExtra("imageurl", imageurl);
+                                            in.putExtra("uid", user.getUid());
+                                            in.putExtra("email", emailtext);
+                                            in.putExtra("pass", adhar);
+                                            in.putExtra("name", nametext);
+                                            dialog.dismiss();
+                                            startActivity(in);
                                         }
-
-                                        Intent in = new Intent(MainActivity.this , Main3Activity.class);
-                                        in.putExtra("imageurl", imageurl);
-                                        in.putExtra("uid", user.getUid());
-                                        in.putExtra("email", emailText);
-                                        in.putExtra("pass", adhar);
-                                        in.putExtra("name", nametext);
-                                        dialog.dismiss();
-                                        startActivity(in);
                                     }
-                                }
-                            });
+                                });
 //                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            dialog.dismiss();
-                            Toast.makeText(MainActivity.this, "User is already registered",
-                                    Toast.LENGTH_SHORT).show();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                dialog.dismiss();
+                                Toast.makeText(MainActivity.this, "User is already registered",
+                                        Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
-                        }
+                            }
 
-                        // ...
-                    }
-                });
+                            // ...
+                        }
+                    });
+        }
     }
 
     @Override

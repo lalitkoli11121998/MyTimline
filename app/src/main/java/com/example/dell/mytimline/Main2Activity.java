@@ -2,11 +2,15 @@ package com.example.dell.mytimline;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
+import android.os.CountDownTimer;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -37,11 +41,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static android.speech.tts.TextToSpeech.QUEUE_FLUSH;
 import static com.example.dell.mytimline.R.layout.activity_main2;
 
 public class Main2Activity extends AppCompatActivity {
@@ -50,11 +56,13 @@ public class Main2Activity extends AppCompatActivity {
     TextView aadhar;
     Button signup;
     private int RC_PHOTO_PICKER=101;
+    private static final int REQ_CODE_SPEECH_INPUT = 168;
     Calendar myCalendar;
     StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     Uri selectedImageUri;
     String phone_no;
+    private  TextToSpeech mTTs;
     ImageView DB;
     String nametext;
     ProgressDialog dialog;
@@ -62,6 +70,8 @@ public class Main2Activity extends AppCompatActivity {
     String password;
     FirebaseStorage mstorage;
     FirebaseFirestore db;
+    CountDownTimer countDownTimer;
+    public String s2;
     int year1;
     int  day,month1;
     String adhaar_no;
@@ -81,6 +91,7 @@ public class Main2Activity extends AppCompatActivity {
         phone = findViewById(R.id.Phonetext);
         signup =findViewById(R.id.signup_button);
         myCalendar = Calendar.getInstance();
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -167,6 +178,14 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (mTTs != null) {
+            mTTs.stop();
+            mTTs.shutdown();
+        }
+        super.onDestroy();
+    }
     public  void updateLabel() {
 
 
@@ -238,4 +257,6 @@ public class Main2Activity extends AppCompatActivity {
             }
         }
     }
+
+
 }
